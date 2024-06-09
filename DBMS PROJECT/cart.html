@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Products - AthStore</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        /* Add a style for the cart count */
+        .cart-icon {
+            position: relative;
+        }
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: red;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="navbar">
+        <div class="logo">
+            <img src="images/Ath-removebg-preview.png" width="300px">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="Home.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contactus.php">Contact</a></li>
+                <li><a href="Account.php">Account</a></li>
+            </ul>
+        </nav>
+        <a href="cart.html" class="cart-icon" id="cart-icon-link">
+            <img src="images/icons8-cart-50.png" width="30px" height="30px">
+            <span class="cart-count">0</span>
+        </a>
+    </div>
+</div>
+<!-------------Cart item details------------->
+<div class="small-container cart-page">
+    <table id="cart-table">
+        <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Subtotal</th>
+        </tr>
+    </table>
+
+    <div class="total-price">
+        <table>
+            <tr>
+                <td>Subtotal</td>
+                <td id="subtotal">0pkr</td>
+            </tr>
+            <tr>
+                <td>Tax</td>
+                <td id="tax">0pkr</td>
+            </tr>
+            <tr>
+                <td>Total</td>
+                <td id="total">0pkr</td>
+            </tr>
+            <tr>
+               <td> <button type="submit" class="btn btn-buy-now" onclick="placeOrder()">BUY NOW!</button></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<!----------Footer---------->
+<div class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-1">
+                <img src="images/Ath-removebg-preview.png">
+                <p>Our Purpose is to Sustainably Make the Pleasure <br>and Benefits of Sports
+                    Accessible to the Many.
+                </p>
+            </div>
+        </div>
+        <hr>
+        <p class="copyright">© 2024 RAR. All rights reserved.</p>
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        loadCart();
+
+        document.querySelectorAll('.cart-quantity').forEach(function(input) {
+            input.addEventListener('change', function() {
+                // Ensure the value is not negative
+                if (input.value < 0) {
+                    input.value = 0;
+                }
+                updateCart();
+            });
+        });
+
+        document.querySelectorAll('.remove-item').forEach(function(link) {
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+                var row = link.closest('tr');
+                row.remove();
+                updateCart();
+            });
+        });
+    });
+
+    function updateCart() {
+        var cart = [];
+        var subtotal = 0;
+        document.querySelectorAll('#cart-table tr').forEach(function(row, index) {
+            if (index > 0) { // skip header row
+                var product = row.querySelector('.cart-info p').textContent;
+                var quantity = Math.max(0, row.querySelector('.cart-quantity').value); // Ensure quantity is non-negative
+                var price = parseInt(row.querySelector('.cart-info small').textContent.replace('Price: ', '').replace('pkr', ''));
+                var subtotalItem = price * quantity;
+                subtotal += subtotalItem;
+
+                // Update the subtotal cell in the current row
+                row.querySelector('td:last-child').textContent = subtotalItem.toFixed(0) + 'pkr'; // Display subtotal as whole number
+
+                cart.push({ product: product, quantity: parseInt(quantity), price: price, size: row.querySelector('.cart-info small.size').textContent.replace('Size: ', '') });
+            }
+        });
+
+        var tax = Math.round(subtotal * 0.1); // Calculate tax
+        var total = Math.round(subtotal * 1.1); // Calculate total
+
+        localStorage.setItem('cart', JSON.stringify(cart));
+        document.getElementById('subtotal').textContent = subtotal.toFixed(0) + 'pkr'; // Display subtotal as whole number
+        document.getElementById('tax').textContent = tax.toFixed(0) + 'pkr'; // Display tax as whole number
+        document.getElementById('total').textContent = total.toFixed(0) + 'pkr'; // Display total as whole number
+        updateCartCount();
+    }
+
+
+
+
+    function loadCart() {
+        var cart = JSON.parse(localStorage.getItem('cart')) || [];
+        var cartTable = document.getElementById('cart-table');
+        var subtotal = 0;
+
+        cart.forEach(function(item) {
+            var row = document.createElement('tr');
+            row.innerHTML = `
+            <td>
+                <div class="cart-info">
+                    <img src="${item.image}" alt="${item.product}">
+                    <div>
+                        <p>${item.product}</p>
+                        <small>Price: ${item.price}pkr</small>
+                        <small class="size">Size: ${item.size}</small>
+                        <br>
+                        <a href="#" class="remove-item">Remove</a>
+                    </div>
+                </div>
+            </td>
+            <td><input type="number" value="${item.quantity}" class="cart-quantity"></td>
+            <td>${item.price * item.quantity}pkr</td>
+        `;
+            cartTable.appendChild(row);
+            subtotal += item.price * item.quantity;
+        });
+
+        document.getElementById('subtotal').textContent = subtotal + 'pkr';
+        document.getElementById('tax').textContent = (subtotal * 0.1) + 'pkr';
+        document.getElementById('total').textContent = (subtotal * 1.1) + 'pkr';
+        updateCartCount();
+    }
+
+    function updateCartCount() {
+        var cart = JSON.parse(localStorage.getItem('cart')) || [];
+        var cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+        document.querySelector('.cart-count').textContent = cartCount;
+    }
+
+    function placeOrder() {
+        localStorage.removeItem('cart');
+        window.location.href = "buynow.php";
+    }
+</script>
+</body>
+</html>

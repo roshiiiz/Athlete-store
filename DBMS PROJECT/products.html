@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Products - AthStore</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        /* Add a style for the cart count */
+        .cart-icon {
+            position: relative;
+        }
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: red;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 12px;
+        }
+        /* Style for search bar */
+        .search-container {
+            display: inline-block;
+            margin-left: 20px;
+        }
+        .search-container input[type="text"] {
+            padding: 6px;
+            margin-top: 8px;
+            font-size: 17px;
+            border: none;
+            border-radius: 5px;
+        }
+        .search-container button {
+            padding: 6px 10px;
+            margin-top: 8px;
+            margin-left: -5px;
+            background: #333;
+            color: white;
+            font-size: 17px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .search-container button:hover {
+            background: #ddd;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="navbar">
+        <div class="logo">
+            <img src="images/Ath-removebg-preview.png" width="300px">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="Home.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contactus.php">Contact</a></li>
+                <li><a href="Account.php">Account</a></li>
+            </ul>
+        </nav>
+        <div class="search-container">
+            <form action="search.php" method="GET">
+                <input type="text" placeholder="Search products.." name="query">
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
+        <div class="cart-icon">
+            <a href="cart.html"><img src="images/icons8-cart-50.png" width="30px" height="30px"></a>
+            <span class="cart-count"></span>
+        </div>
+    </div>
+</div>
+
+<div class="small-container">
+    <div class="row row-2">
+        <h2>All Products</h2>
+        <select id="sortOptions" onchange="sortProducts()">
+            <option value="default">Default Sorting</option>
+            <option value="priceDesc">Sort by Price H to L</option>
+            <option value="priceAsc">Sort by Price L to H</option>
+            <option value="ratingDesc">Sort by Rating</option>
+        </select>
+    </div>
+    <div id="products-container" class="row">
+        <div class="col-4">
+            <a href="RedTShirt.php"><img src="images/wmts003036_1.jpg"></a>
+            <a href="RedTShirt.php"><h4 class="product-title">Red Printed Tshirt</h4></a>
+            <div class="rating" data-rating="4">
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star"></span>
+            </div>
+            <p class="product-price" data-price="5000">5000pkr</p>
+        </div>
+
+        <div class="col-4">
+            <a href="WhiteFShirt.php"><img src="images/il_fullxfull.4111149957_emq4_grande.webp"></a>
+            <a href="WhiteFShirt.php"><h4 class="product-title">White Football Shirt</h4></a>
+            <div class="rating" data-rating="3">
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+            </div>
+            <p class="product-price" data-price="3500">3500pkr</p>
+        </div>
+
+        <div class="col-4">
+            <a href="SportsT.php"><img src="images/S9sbog_grande.webp"></a>
+            <a href="SportsT.php"><h4 class="product-title">Sports Trousers</h4></a>
+            <div class="rating" data-rating="5">
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+            </div>
+            <p class="product-price" data-price="4000">4000pkr</p>
+        </div>
+
+        <div class="col-4">
+            <a href="AthleteS.php"><img src="images/416154050-600x450.jpeg"></a>
+            <a href="AthleteS.php"><h4 class="product-title">Sports Trousers</h4></a>
+            <div class="rating" data-rating="2">
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+            </div>
+            <p class="product-price" data-price="7000">7000pkr</p>
+        </div>
+
+
+        </div>
+
+    <div class="row">
+        <div class="col-4">
+            <img src="images/406207061-600x450.jpeg">
+            <h4>Sneakers Footwear</h4>
+            <div class="rating">
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+
+            </div>
+            <p>2000pkr</p>
+        </div>
+
+        <div class="col-4">
+            <img src="images/images.jpg">
+            <h4>Blue Polo Shirt</h4>
+            <div class="rating">
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star"></span>
+
+            </div>
+            <p>3000pkr</p>
+        </div>
+
+        <div class="col-4">
+            <img src="images/tck-socks-elite-performance-sports-socks-2-0-crew-length-39517172859095_grande.webp">
+            <h4>Sports Socks</h4>
+            <div class="rating">
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+
+            </div>
+            <p>500pkr</p>
+        </div>
+
+        <div class="col-4">
+            <img src="images/puma-pu102941006-2-450x600.jpg">
+            <h4>Luxury Athlete Watch</h4>
+            <div class="rating">
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star"></span>
+
+            </div>
+            <p>7000pkr</p>
+        </div>
+
+        <div class="row">
+            <div class="col-4">
+                <img src="images/item_4634819_451.jpeg">
+                <h4>Sport SmartWatch</h4>
+                <div class="rating">
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+
+                </div>
+                <p>10000pkr</p>
+            </div>
+
+            <div class="col-4">
+                <img src="images/386366143-600x450.jpeg">
+                <h4>Blue Yo Joggers</h4>
+                <div class="rating">
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+
+                </div>
+                <p>5000pkr</p>
+            </div>
+
+            <div class="col-4">
+                <img src="images/K71153.webp">
+                <h4>Women Sweatshirt</h4>
+                <div class="rating">
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+
+                </div>
+                <p>2000pkr</p>
+            </div>
+
+            <div class="col-4">
+                <img src="images/23_M_MenTrackSuitTrousers_FMBTKS23-010_R3_grande.webp">
+                <h4>Olive Tracksuit</h4>
+                <div class="rating">
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+
+                </div>
+                <p>8000pkr</p>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="page-btn">
+        <span>1</span>
+        <p>More coming soon</p>
+    </div>
+
+
+<!----------Footer---------->
+<div class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-1">
+                <img src="images/Ath-removebg-preview.png">
+                <p>Our Purpose is to Sustainably Make the Pleasure <br>and Benefits of Sports
+                    Accessible to the Many.
+                </p>
+            </div>
+        </div>
+        <hr>
+        <p class="copyright">© 2024 RAR. All rights reserved.</p>
+    </div>
+</div>
+<script src="cart.js" defer></script>
+<script>
+    function sortProducts() {
+        var sortOption = document.getElementById('sortOptions').value;
+        var productsContainer = document.getElementById('products-container');
+        var products = Array.from(productsContainer.getElementsByClassName('col-4'));
+
+        products.sort(function(a, b) {
+            var priceA = parseInt(a.querySelector('.product-price').getAttribute('data-price'));
+            var priceB = parseInt(b.querySelector('.product-price').getAttribute('data-price'));
+            var ratingA = parseInt(a.querySelector('.rating').getAttribute('data-rating'));
+            var ratingB = parseInt(b.querySelector('.rating').getAttribute('data-rating'));
+
+            if (sortOption === 'priceAsc') {
+                return priceA - priceB;
+            } else if (sortOption === 'priceDesc') {
+                return priceB - priceA;
+            } else if (sortOption === 'ratingDesc') {
+                return ratingB - ratingA;
+            } else {
+                return 0; // Default sorting
+            }
+        });
+
+        productsContainer.innerHTML = '';
+        products.forEach(function(product) {
+            productsContainer.appendChild(product);
+        });
+    }
+</script>
+</body>
+</html>

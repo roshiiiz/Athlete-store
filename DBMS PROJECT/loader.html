@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <style>
+            body{
+                background-color: blue;
+                
+            }
+            .loader{
+                margin-top: 200;
+                margin-left: 600;
+                height: 150px;
+                width: 150px;
+                background-color: transparent;
+border: 8px solid rgb(20, 131, 57);
+border-radius: 50%;
+border-top: 8px solid red;
+border-bottom: 8px solid red;
+animation: rotate 2s 3;
+
+            }
+            @keyframes rotate{
+                100%{
+                    rotate: 360deg;
+                }
+            }
+            button{
+                margin-left: 600px;
+                margin-top: 50;
+                background-color: rgb(0, 255, 204);
+                width: 150px;
+                height: 60px;
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 15px;
+            
+            }
+            h1{
+                
+                margin-left: 590px;
+                margin-top: 60px;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+           color: rgb(41, 189, 189);
+           transition: all ease 0.5s;
+           cursor: progress;
+           transition-delay: 5s;
+            }
+            h1:hover{
+                text-shadow: 0 0 5px #03e9f4,0 0 15px #03e9f4,0 0 15px #03e9f4,0 0 100px #03e9f4 ;
+            }
+        </style>
+    </head>
+    <body>
+        
+        <div class="loader"></div>
+        <h1 >ORDER PLACED!!!</h1>
+        <button><b><a href="Home.html" >CONTINUE Shopping </a></b></button>
+    </body>
+</html>
